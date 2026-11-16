@@ -1,56 +1,57 @@
-# Welcome to your Expo app 👋
+# StickerSmash
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform photo sticker app built with [Expo](https://expo.dev) and React Native, following the official [Expo tutorial](https://docs.expo.dev/tutorial/introduction/). Pick a photo from your library and decorate it with emoji stickers.
+
+Built with Expo SDK 58, Expo Router (native tabs) and `@expo/ui`, which renders native SwiftUI controls on iOS and Jetpack Compose on Android.
 
 ## Get started
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Then open the app in one of these:
 
-### Other setup steps
+- **Expo Go**: scan the QR code with your phone camera
+- **iOS Simulator**: press `i`
+- **Web**: press `w`
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Development builds
 
-## Learn more
+The app has three variants, set by `APP_VARIANT` in [`app.config.js`](app.config.js). Each has its own bundle ID, so they can be installed side by side.
 
-To learn more about developing your project with Expo, look at the following resources:
+| Variant | Bundle ID | EAS profile |
+| --- | --- | --- |
+| Development | `com.femiii.StickerSmash.dev` | `development`, `ios-simulator` |
+| Preview | `com.femiii.StickerSmash.preview` | `preview` |
+| Production | `com.femiii.StickerSmash` | `production` |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+# Build a development client for the iOS Simulator
+eas build --platform ios --profile ios-simulator
 
-## Join the community
+# Start the dev server for the development build
+npm run dev
+```
 
-Join our community of developers creating universal apps.
+Installing builds on a physical iPhone requires an Apple Developer Program membership.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Project structure
+
+```
+src/
+  app/              Routes (Expo Router)
+    (tabs)/         Home and About tabs
+  components/       Shared components, with .ios / .android variants
+assets/images/      App icons, background and sticker images
+```
+
+## Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm start` | Start the dev server |
+| `npm run dev` | Start the dev server for the development build |
+| `npm run lint` | Lint with ESLint |
+| `npx tsc --noEmit` | Typecheck |
